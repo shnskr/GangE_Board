@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/common :: head('메인 화면')">
+</head>
+
+<body>
+    <nav th:replace="fragments/common :: menu('home')">
+    </nav>
+
+    <span style="position:fixed; left:0px; bottom:0px; z-index: -1;">
+        <img th:src="@{images/gange.png}" width="40%">
+    </span>
+
+    <div class="container">
+
+        <div class="starter-template">
+            <h1>메인 화면</h1>
+            <p class="lead">메인 화면</p>
+        </div>
+
+        <div class="login_form" sec:authorize="!isAuthenticated()">
+            <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
+            <form th:action="@{/login}" method="post">
+                <input class="form-control my-3" name="id" type="text" value="" placeholder="아이디" autofocus>
+                <input class="form-control my-3" name="password" type="password" value="" placeholder="비밀번호">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    <span>로그인</span>
+                </button>
+                <a class="btn btn-lg btn-primary btn-block" type="button" th:href="@{/account/signup}">회원가입</a>
+            </form>
+            <div th:if="${param.error}" class="alert alert-danger my-3">아이디 또는 비밀번호가 틀립니다</div>
+        </div>
+
+        <div class="login_form" sec:authorize="isAuthenticated()">
+            <div sec:authentication="principal.username"></div>
+            <div sec:authentication="principal.password"></div>
+            <div sec:authentication="principal.memberNo"></div>
+            <div sec:authentication="principal.regDate"></div>
+            <div>${principal.memberNo}</div>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
