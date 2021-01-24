@@ -23,7 +23,7 @@ public class BoardController {
 	@Autowired
 	private BoardRepository boardRepo;
 
-	@GetMapping("list")
+	@GetMapping("/list")
 	public String list(Model model,
 			@PageableDefault(size = 10, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable) {
 
@@ -43,12 +43,12 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@GetMapping("write")
+	@GetMapping("/write")
 	public String writeGet(Model model) {
 		return "board/write";
 	}
 	
-	@PostMapping("write")
+	@PostMapping("/write")
 	public String writePost(Board board) {
 		SecurityMember member = (SecurityMember)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println(member.getMemberNo());

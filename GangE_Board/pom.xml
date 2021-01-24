@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gange</groupId>
 	<artifactId>GangE_Board</artifactId>
@@ -20,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- 스프링 스타터 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,6 +76,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+<!-- 지원되지 않는 문자 집합(클래스 경로에 orai18n.jar 추가): KO16MSWIN949 에러 해결-->
+		<dependency>
+			<groupId>com.oracle.database.nls</groupId>
+			<artifactId>orai18n</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

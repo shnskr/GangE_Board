@@ -29,7 +29,10 @@
                 </button>
                 <a class="btn btn-lg btn-primary btn-block" type="button" th:href="@{/account/signup}">회원가입</a>
             </form>
-            <div th:if="${param.error}" class="alert alert-danger my-3">아이디 또는 비밀번호가 틀립니다</div>
+            
+            <th:block th:if="${param.error}">
+            	<div th:if="${param.error.toString().equals('login')}" class="alert alert-danger my-3">아이디 또는 비밀번호가 틀립니다</div>
+            </th:block>
         </div>
 
         <div class="login_form" sec:authorize="isAuthenticated()">
@@ -37,7 +40,7 @@
             <div sec:authentication="principal.password"></div>
             <div sec:authentication="principal.memberNo"></div>
             <div sec:authentication="principal.regDate"></div>
-            <div>${principal.memberNo}</div>
+            <div sec:authentication="principal.temp"></div>
         </div>
 
     </div>

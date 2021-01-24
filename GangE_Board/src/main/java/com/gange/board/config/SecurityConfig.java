@@ -28,20 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		// static 폴더의 하위 파일들은 인증을 무시 꺄륵꺄르륵
+		// static 폴더의 하위 파일들은 인증을 무시
 		web.ignoring().antMatchers("/css/**", "/images/**", "/js/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/account/**").permitAll() // 해당 경로는 누구든 접근가능 꺄륵
-			.anyRequest().authenticated() // 그 밖에 경로는 인증된 사용자만 접근 가능 깨륵개르륵
+			.antMatchers("/", "/account/**", "/board/list").permitAll() // 해당 경로는 누구든 접근가능
+			.anyRequest().authenticated() // 그 밖에 경로는 인증된 사용자만 접근 가능
 			.and()
 		.formLogin()
 			.loginPage("/") // 로그인 페이지 연결
 			.loginProcessingUrl("/login") // login form의 action과 일치 시켜야한다
-			.failureUrl("/?error=true") // 로그인 실패시 경호
+			.failureUrl("/?error=login") // 로그인 실패시 경로
 			.defaultSuccessUrl("/") // 로그인 성공시 연결 페이지
 			.usernameParameter("id") // 파라미터 이름 username을 id로 변경
 			.passwordParameter("password")
