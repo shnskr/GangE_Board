@@ -15,8 +15,8 @@
     <div class="container">
 
         <div class="starter-template">
-            <h1>메인 화면</h1>
-            <p class="lead">메인 화면</p>
+            <h1 sec:authorize="!isAuthenticated()">로그인을 해주세요 !</h1>
+            <p class="lead" sec:authorize="!isAuthenticated()">로그인 후 진입 가능합니다.</p>
         </div>
 
         <div class="login_form" sec:authorize="!isAuthenticated()">

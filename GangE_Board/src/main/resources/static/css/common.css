@@ -4,6 +4,7 @@ body {
 .starter-template {
     padding: 3rem 1.5rem;
     text-align: center;
+    height: 200px;
 }
 
 .login_form {

@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/account/**", "/board/list").permitAll() // 해당 경로는 누구든 접근가능
+			.antMatchers("/", "/account/**").permitAll() // 해당 경로는 누구든 접근가능
 			.anyRequest().authenticated() // 그 밖에 경로는 인증된 사용자만 접근 가능
 			.and()
 		.formLogin()

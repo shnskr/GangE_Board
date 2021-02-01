@@ -90,4 +90,10 @@ public class SecurityMember implements UserDetails {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+
+	@Override
+	public String toString() {
+		return "SecurityMember [username=" + username + ", password=" + password + ", memberNo=" + memberNo
+				+ ", regDate=" + regDate + ", temp=" + temp + "]";
+	}
 }

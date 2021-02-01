@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,26 +43,24 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		return "board/list";
 	}
-	
+
 	@GetMapping("/write")
 	public String writeGet(Model model) {
 		return "board/write";
 	}
-	
+
 	@PostMapping("/write")
 	public String writePost(Board board) {
-		SecurityMember member = (SecurityMember)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(member.getMemberNo());
-		System.out.println(member.getUsername());
-		System.out.println(member.getPassword());
-		System.out.println(member.getTemp());
-		System.out.println(board.getWriterNo());
-		System.out.println(board.getTitle());
-		System.out.println(board.getContents());
-		
-//		board.setWriterNo(member.getMemberNo());
-//		boardRepo.save(board);
-		
+		SecurityMember member = (SecurityMember) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		board.setWriterNo(member.getMemberNo());
+		System.out.println(board);
+		boardRepo.save(board);
+
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/{boardId}")
+	public String detail(@PathVariable String boardId) {
+		return "hi" + boardId;
 	}
 }

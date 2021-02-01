@@ -36,7 +36,7 @@ public class AccountService implements UserDetailsService{
 		SecurityMember securityMember = new SecurityMember();
 		
 		if (member != null) {
-			securityMember.setMemberNo(member.getMemberNO());
+			securityMember.setMemberNo(member.getMemberNo());
 			securityMember.setUsername(member.getId());
 			securityMember.setPassword(member.getPassword());
 			securityMember.setRegDate(member.getRegDate());

@@ -12,37 +12,34 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity	
-@SequenceGenerator(
-		name="memberSeq",
-		sequenceName="MEMBER_SEQ",
-		allocationSize=1)
-@Table(name="MEMBER")
+@Entity
+@SequenceGenerator(name = "memberSeq", sequenceName = "MEMBER_SEQ", allocationSize = 1)
+@Table(name = "MEMBER")
 public class Member {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="memberSeq")
-	@Column(name="MEMBER_NO")
-	private int memberNO;
-	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "memberSeq")
+	@Column(name = "MEMBER_NO")
+	private int memberNo;
+
 //	@NotNull
-	@Column(name="ID")
+	@Column(name = "ID")
 	private String id;
-	
+
 //	@NotNull
-	@Column(name="PASSWORD")
+	@Column(name = "PASSWORD")
 	private String password;
-	
+
 	@CreationTimestamp // SYSDATE로 추가하기 위한 어노테이션
-	@Column(name="REG_DATE")
+	@Column(name = "REG_DATE")
 	private Date regDate;
 
-	public int getMemberNO() {
-		return memberNO;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMemberNO(int memberNO) {
-		this.memberNO = memberNO;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public String getId() {
@@ -68,5 +65,5 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
+
 }
