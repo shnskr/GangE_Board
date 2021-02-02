@@ -1,6 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="fragments/common :: head('게시판')">
 <!-- Bootstrap CSS -->
 	<link rel="stylesheet"
@@ -9,33 +8,26 @@
 		crossorigin="anonymous">
 	<link th:href="@{/css/common.css}" rel="stylesheet">
 </head>
-
 <body>
 	<nav th:replace="fragments/common :: menu('board')"></nav>
-
-    <div class="container">
-        <h2>글쓰기</h2>
-
-        <form id="writeForm" class="mt-5" th:action="@{/board/write}" method="post">
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해 주세요">
+	
+	<div class="container">
+		<h2>게시글</h2>
+		<div class="mt-5">
+			<div th:text="${board.title}" style="font-size: 50px;"></div>
+			<strong><span th:text="${board.member.id}" style="font-size: 20px"></span></strong>
+			<span class="ml-3" th:text="${#dates.format(board.regDate,'yy-MM-dd HH:mm')}" style="color: gray;"></span>
+			<span class="ml-3" th:text="'조회 ' + ${board.viewCnt}" style="color: gray;"></span>
+			<div class="border-bottom border-top my-4" th:text="${board.contents}" style="height: 400px; font-size: 25px;"></div>
+			<div>
+				<a type="button" class="btn btn-primary" th:href="@{'/board/update/' + ${board.boardNo}}"
+					th:if="${#authentication.principal.memberNo == board.writerNo}">수정</a>
+                <a type="button" class="btn btn-primary float-right" th:href="@{/board/list}">뒤로</a>
             </div>
+		</div>
+	</div>
 
-            <div class="form-group">
-                <label for="contents">내용</label>
-                <textarea class="form-control" id="contents" name="contents" rows="18"
-                    placeholder="내용을 입력해 주세요"></textarea>
-            </div>
-
-            <div>
-                <a type="button" class="btn btn-outline-danger" th:href="@{/board/list}">취소</a>
-                <button id="submitBtn" type="button" class="btn btn-primary float-right">글쓰기</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Optional JavaScript -->
+	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -46,8 +38,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-
-    <script src="/js/write.js"></script>
 </body>
-
 </html>

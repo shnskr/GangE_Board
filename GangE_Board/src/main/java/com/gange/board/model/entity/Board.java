@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @SequenceGenerator(name = "boardSeq", sequenceName = "BOARD_SEQ", allocationSize = 1)
@@ -40,6 +41,7 @@ public class Board {
 	private Member member;
 
 	@CreationTimestamp // SYSDATE로 추가하기 위한 어노테이션
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") // 패턴에 맞는 문자열로 입력 받을시 Date 타입으로 자동 변환
 	@Column(name = "REG_DATE")
 	private Date regDate;
 

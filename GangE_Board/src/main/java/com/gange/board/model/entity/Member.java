@@ -66,4 +66,9 @@ public class Member {
 		this.regDate = regDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", id=" + id + ", password=" + password + ", regDate=" + regDate + "]";
+	}
+
 }
