@@ -56,7 +56,6 @@ public class BoardController {
 	public String writePost(Board board) {
 		SecurityMember member = (SecurityMember) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		board.setWriterNo(member.getMemberNo());
-		System.out.println(board);
 		boardRepo.save(board);
 
 		return "redirect:/board/list";
@@ -64,7 +63,12 @@ public class BoardController {
 	
 	@GetMapping("/{boardId}")
 	public String detail(Model model, @PathVariable int boardId) {
-		model.addAttribute("board", boardRepo.getOne(boardId));
+		Board board = boardRepo.getOne(boardId);
+		board.setViewCnt(board.getViewCnt() + 1);
+		
+		boardRepo.save(board);
+		
+		model.addAttribute("board", board);
 		return "board/detail";
 	}
 	
@@ -85,6 +89,18 @@ public class BoardController {
 	public String updatePost(Board board) {
 		System.out.println(board);
 		boardRepo.save(board);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/delete/{boardId}")
+	public String deleteGet(@PathVariable int boardId) {
+		SecurityMember member = (SecurityMember) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Board board = boardRepo.getOne(boardId);
+		
+		if (member.getMemberNo() == board.getWriterNo()) {
+			boardRepo.deleteById(boardId);
+		}
+		
 		return "redirect:/board/list";
 	}
 }

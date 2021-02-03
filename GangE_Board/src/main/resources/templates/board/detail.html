@@ -22,6 +22,8 @@
 			<div>
 				<a type="button" class="btn btn-primary" th:href="@{'/board/update/' + ${board.boardNo}}"
 					th:if="${#authentication.principal.memberNo == board.writerNo}">수정</a>
+				<a type="button" class="btn btn-outline-danger" th:onclick="del([[${board.boardNo}]])"
+					th:if="${#authentication.principal.memberNo == board.writerNo}">삭제</a>
                 <a type="button" class="btn btn-primary float-right" th:href="@{/board/list}">뒤로</a>
             </div>
 		</div>
@@ -38,5 +40,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+        
+    <script>
+		function del(boardId) {
+			var chk = confirm("정말 삭제하시겠습니까?");
+			if (chk) {
+				console.log();
+				location.href = 'delete/' + boardId;
+			}
+		}	
+	</script>
+        
 </body>
 </html>
